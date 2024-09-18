@@ -51,10 +51,17 @@
       }).then(async(result)=>{
         if (result.isConfirmed){
           await axios.get("https://api.jlipreso.com/miit/public/api/user/deleteByID/" + this.dataid).then(async()=>{
-            this.getAllRecord();
           });
+          if (result.isConfirmed) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success"
+            });
+          }
+          
         }
-      })
+      });
 
 
       }

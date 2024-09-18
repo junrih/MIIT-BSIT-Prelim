@@ -30,8 +30,8 @@
 <script lang="ts">
 
   import Sidebar from "@/components/Sidebar.vue";
-import axios from "axios";
-import Swal from "sweetalert2";
+  import axios from "axios";
+  import Swal from "sweetalert2";
 
   export default {
     name: "EditRecord",
@@ -43,23 +43,26 @@ import Swal from "sweetalert2";
       }
     },
     methods: {
-      async updateAge(user: any){
-        await axios.get ("https://api.jlipreso.com/miit/public/api/user/updateRecord/"+this.dataid+"/"+this.age).then(async(response)=>{
-          Swal.fire({
-              title: "Do you want to save the changes?",
-              showDenyButton: true,
-              showCancelButton: true,
-              confirmButtonText: "Save",
-              denyButtonText: `Don't save`
+      async updateAge(){
+        Swal.fire({
+            title: "Do you want to save the changes?",
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: "Save",
+            denyButtonText: `Don't save`
           }).then((result) => {
- 
           if (result.isConfirmed) {
-            Swal.fire("Saved!", "", "success");
-          } else if (result.isDenied) {
-            Swal.fire("Changes are not saved", "", "error");
-  }
-});
+               axios.get ("https://api.jlipreso.com/miit/public/api/user/updateRecord/"+this.dataid+"/"+this.age).then(async(response)=>{
+              });
+              if (result.isConfirmed) {
+              Swal.fire("Saved!", "", "success");
+            } else if (result.isDenied) {
+              Swal.fire("Changes are not saved", "", "info");
+            }
+          } 
         });
+        
+        
       }
     }
   }
